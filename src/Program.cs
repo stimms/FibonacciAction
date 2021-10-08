@@ -9,18 +9,30 @@ namespace dotnet_sample_action
     {
         static readonly Core _core = new Core();
 
-        static async Task Main(string[] args)
+        static double Phi = (1 + Math.Pow(5, .5)) / 2;
+        static double phi = (1 - Math.Pow(5, .5)) / 2;
+        static ulong[] generateFibonaccisClosed(int n)
+        {
+            ulong[] fib = new ulong[n];
+            for (int i = 0; i < n; i++)
+            {
+                fib[i] = (ulong)((Math.Pow(Phi, i) - Math.Pow(phi, i)) / (Phi - phi));
+            }
+            return fib;
+        }
+
+        static void Main(string[] args)
         {
             try
             {
-                 var ms = _core.GetInput("milliseconds");
-                 _core.Debug($"Waiting {ms} milliseconds..."); // debug is only output if you set teh secret ACTIONS_RUNNER_DEBUG to true
+                var fibNumber = Int32.Parse(_core.GetInput("fibNumber"));
+                _core.Info($"Generating up to {fibNumber}..."); // debug is only output if you set teh secret ACTIONS_RUNNER_DEBUG to true
 
-                 _core.Debug(DateTime.Now.ToLongTimeString());
-                 await Task.Delay(int.Parse(ms));
-                 _core.Debug(DateTime.Now.ToLongTimeString());
+                _core.Debug(DateTime.Now.ToLongTimeString());
+                generateFibonaccisClosed(fibNumber);
+                _core.Debug(DateTime.Now.ToLongTimeString());
+                _core.Info(String.Join(',', fibNumber));
 
-                 _core.SetOutput("time", DateTime.Now.ToLongTimeString());
             }
             catch (Exception ex)
             {

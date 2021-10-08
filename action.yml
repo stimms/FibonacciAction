@@ -1,11 +1,11 @@
-name: 'Sample Dotnet Action'
-description: 'sample dotnet based action'
-author: 'Your name or organization here'
+name: 'Fibonacci Number'
+description: 'The best fibonacci number generator action on github'
+author: 'AspNetMonsters'
 inputs:
-  milliseconds:
+  fibNumber:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'The number you would like to generate up to'
+    default: '5'
 runs:
   using: 'node12'
   main: 'index.js'
