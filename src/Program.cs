@@ -29,9 +29,9 @@ namespace dotnet_sample_action
                 _core.Info($"Generating up to {fibNumber}..."); // debug is only output if you set teh secret ACTIONS_RUNNER_DEBUG to true
 
                 _core.Debug(DateTime.Now.ToLongTimeString());
-                generateFibonaccisClosed(fibNumber);
+                var fibs = generateFibonaccisClosed(fibNumber);
                 _core.Debug(DateTime.Now.ToLongTimeString());
-                _core.Info(String.Join(',', fibNumber));
+                _core.Info(String.Join(',', fibs));
 
             }
             catch (Exception ex)
